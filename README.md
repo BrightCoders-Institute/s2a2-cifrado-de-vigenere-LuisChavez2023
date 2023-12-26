@@ -33,4 +33,4 @@ rubocop <VigenereCipherRuby.rb>.rb
 rspec VigenereCipherRuby_spec.rb
 
 ## Credits
-- [@LuisCD2023](https://github.com/LuisCD2023)
+- [@LuisChavez2023](https://github.com/LuisChavez2023)
