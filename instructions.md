@@ -111,75 +111,25 @@ Recuerda que el objetivo principal de este flujo de trabajo es aprender y mejora
 
 El cifrado de Vigenère es un tipo de cifrado polialfabético, lo que significa que utiliza diferentes alfabetos para cifrar un mensaje. El algoritmo se basa en una tabla conocida como la tabla de Vigenère o tabla de coincidencias, que es esencial para su implementación.
 
-A continuación tienes la explicación paso a paso del cifrado de Vigenère con dos palabras diferentes como ejemplos:
+Aquí está el paso a paso del algoritmo:
 
-## Cifrado de Vigenère: Explicación Paso a Paso
+1. Primero, necesitas tener la clave de cifrado. La clave es una palabra o una frase que se utilizará para cifrar el mensaje. Por ejemplo, la clave podría ser "SECRETO".
 
-1. **Definir el mensaje original y la clave de cifrado:**
-   - El mensaje original es el texto que se desea cifrar.
-   - La clave de cifrado es una palabra o frase que se utilizará para cifrar el mensaje.
+2. Luego, convierte el mensaje original y la clave a valores numéricos según la posición de las letras en el alfabeto. Por ejemplo, A=0, B=1, C=2, y así sucesivamente. Si el mensaje original es "HOLA" y la clave es "SECRETO", se convierten a números de la siguiente manera:
+   - Mensaje original: H=7, O=14, L=11, A=0
+   - Clave: S=18, E=4, C=2, R=17, E=4, T=19, O=14
 
-   **Ejemplo 1:**
-   - Mensaje original: “HOLA”
-   - Clave de cifrado: “SECRETO”
+3. Ahora, se debe repetir la clave para que tenga la misma longitud que el mensaje original. En este caso, la clave "SECRETO" se repetirá hasta que tenga la longitud del mensaje original. Por lo tanto, la clave repetida sería: "SECRETOSE".
 
-   **Ejemplo 2:**
-   - Mensaje original: “RUBY”
-   - Clave de cifrado: “COD”
+4. A continuación, sumamos el valor numérico de cada letra del mensaje original con el valor numérico correspondiente de la clave repetida, utilizando aritmética modular. Para esto, utilizamos la tabla de Vigenère.
 
-2. **Convertir el mensaje original y la clave a valores numéricos:**
-   - Asignar un número a cada letra del mensaje original y la clave según su posición en el alfabeto. Por ejemplo, A=0, B=1, C=2, etc.
+   - Para cifrar el primer carácter del mensaje original "H" (valor numérico 7) con el primer carácter de la clave "S" (valor numérico 18), encontramos la intersección en la tabla de Vigenère. El valor cifrado sería "Z" (valor numérico 25). Así sucesivamente, se aplica este proceso para cada letra del mensaje original.
 
-   **Ejemplo 1:**
-   - Mensaje original: H=7, O=15, L=11, A=0
-   - Clave de cifrado: S=19, E=4, C=2, R=18, E=4, T=20, O=15
+5. Finalmente, convertimos los valores numéricos cifrados en letras nuevamente, utilizando la tabla de Vigenère inversa.
 
-   **Ejemplo 2:**
-   - Mensaje original: R=18, U=21, B=1, Y=25
-   - Clave de cifrado: C=2, O=15, D=3
+   - Por ejemplo, el valor numérico cifrado "Z" (valor numérico 25) se convierte en "A". Así, convertimos todos los valores numéricos cifrados nuevamente a letras.
 
-3. **Repetir la clave para que tenga la misma longitud que el mensaje original:**
-   - Repetir la clave hasta alcanzar o superar la longitud del mensaje original. Esto se hace para asegurar que haya suficientes caracteres de la clave para cifrar cada letra del mensaje original.
-
-   **Ejemplo 1:**
-   - Mensaje original: HOLA
-   - Clave repetida: SECRETO
-  
-   - En este primer ejemplo no se ocupa repetir la clave pues la longitud de la clave es mayor la del mensaje original
-
-   **Ejemplo 2:**
-   - Mensaje original: RUBY
-   - Clave repetida: CODC
-  
-   - En este ejemplo, si es necesario repetir la clave, por que las longitudes son iguales, por esto se agrega la letra C al final
-
-4. **Cifrar el mensaje original:**
-   - Para cada letra del mensaje original, realizar los siguientes pasos:
-     - Obtener el valor numérico de la letra del mensaje original.
-     - Obtener el valor numérico correspondiente de la letra de la clave repetida.
-     - Sumar los valores numéricos utilizando aritmética modular para obtener el valor numérico cifrado.
-     - Convertir el valor numérico cifrado en una letra utilizando el alfabeto.
-
-   **Ejemplo 1:**
-   - Letra 1: H (valor numérico: 7) + S (valor numérico: 19) = Z (valor numérico cifrado: 26) -> Letra cifrada: Z
-   - Letra 2: O (valor numérico: 15) + E (valor numérico: 4) = S (valor numérico cifrado: 19) -> Letra cifrada: S
-   - Letra 3: L (valor numérico: 11) + C (valor numérico: 2) = N (valor numérico cifrado: 13) -> Letra cifrada: N
-   - Letra 4: A (valor numérico: 0) + R (valor numérico: 18) = R (valor numérico cifrado: 18) -> Letra cifrada: R
-
-   **Ejemplo 2:**
-   - Letra 1: R (valor numérico: 18) + C (valor numérico: 2) = T (valor numérico cifrado: 20) -> Letra cifrada: T
-   - Letra 2: U (valor numérico: 21) + O (valor numérico: 15) = J (valor numérico cifrado: 36-26) -> Letra cifrada: J
-   - Letra 3: B (valor numérico: 1) + D (valor numérico: 3) = E (valor numérico cifrado: 4) -> Letra cifrada: E
-   - Letra 4: Y (valor numérico: 25) + C (valor numérico: 2) = A (valor numérico cifrado: 27-26) -> Letra cifrada: A
-
-5. **Obtener el mensaje cifrado:**
-   - Concatenar las letras cifradas para formar el mensaje cifrado final.
-
-   **Ejemplo 1:**
-   - Mensaje cifrado: ZSNR
-
-   **Ejemplo 2:**
-   - Mensaje cifrado: TJEA
+6. El resultado final es el mensaje cifrado, que se obtiene al combinar las letras obtenidas en el paso anterior. En este caso, si ciframos el mensaje original "HOLA" con la clave "SECRETO", el mensaje cifrado resultante sería "ZURW".
 
 Este es el proceso básico del algoritmo de cifrado de Vigenère. Para implementarlo en un programa, necesitarías funciones para convertir letras en valores numéricos y viceversa, así como la tabla de Vigenère para encontrar las coincidencias. Puedes utilizar ciclos y operaciones matemáticas para realizar las sumas y cálculos necesarios.
 
